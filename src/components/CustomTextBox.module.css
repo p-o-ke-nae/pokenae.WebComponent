@@ -1,0 +1,26 @@
+.customtextbox {
+    width: 100%;
+    border-radius: 5px;
+    resize: none; /* リサイズを無効にする */
+    border: solid 1px var(--main-border-color);
+    font-size: inherit;
+    padding: 2px;
+}
+.customtextbox:hover {
+    background-color: var(--base-color);
+}
+.customtextbox:focus {
+    background-color: var(--base-color);
+}
+.customtextbox[required] {
+    background-color: var(--required-bg-color);
+}
+.customtextbox[required]:hover {
+    background-color: var(--base-color);
+}
+.customtextbox[required]:focus {
+    background-color: var(--base-color);
+}
+.customtextbox[readonly] {
+    background-color: var(--readonly-bg-color);
+}

@@ -1,0 +1,24 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.pagination button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    cursor: pointer;
+    width: 50px; /* 幅を固定値に設定 */
+}
+
+.pagination button.active {
+    background-color: var(--main-color);
+    color: var(--base-bg-color);
+    border-color: var(--main-hover-color);
+}
+
+.pagination button:hover {
+    border-color: var(--main-color);
+}

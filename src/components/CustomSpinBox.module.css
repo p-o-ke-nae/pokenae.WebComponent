@@ -1,0 +1,26 @@
+.customspinbox {
+  width: 100%;
+  border-radius: 5px;
+  resize: none; /* リサイズを無効にする */
+  border: solid 1px var(--main-border-color);
+  font-size: inherit;
+  padding: 2px;
+}
+.customspinbox:hover {
+  background-color: var(--base-color);
+}
+.customspinbox:focus {
+  background-color: var(--base-color);
+}
+.customspinbox[required] {
+  background-color: var(--required-bg-color);
+}
+.customspinbox[required]:hover {
+  background-color: var(--base-color);
+}
+.customspinbox[required]:focus {
+  background-color: var(--base-color);
+}
+.customspinbox[readonly] {
+  background-color: var(--readonly-bg-color);
+}

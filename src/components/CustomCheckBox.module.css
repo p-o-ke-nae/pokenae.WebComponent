@@ -1,0 +1,74 @@
+.customcheckbox-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.checkboxInput {
+    display: none;
+}
+
+.customcheckbox {
+    width: 20px;
+    height: 20px;
+    background-color: var(--base-bg-color);
+    border: 2px solid var(--main-color);
+    border-radius: 3px;
+    position: relative;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.customcheckbox-container:hover .customcheckbox {
+    background-color: var(--base-color);
+}
+
+.checkboxInput:checked + .customcheckbox {
+    background-color: var(--main-color);
+    border-color: var(--main-color);
+    animation: checkAnimation 0.3s ease-in-out;
+}
+
+.checkboxInput:checked + .customcheckbox::after {
+    content: '✔';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 14px;
+    color: var(--base-bg-color);
+    transform: translate(-50%, -50%);
+}
+
+.customcheckbox-container:hover .checkboxInput:checked + .customcheckbox::after {
+    color: var(--base-color);
+}
+
+.checkboxInput:indeterminate + .customcheckbox {
+    background-color: var(--main-color);
+    border-color: var(--main-color);
+}
+
+.checkboxInput:indeterminate + .customcheckbox::after {
+    content: '-';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 14px;
+    color: var(--base-bg-color);
+    transform: translate(-50%, -50%);
+}
+
+.checkboxLabel {
+    margin-left: 8px;
+}
+
+@keyframes checkAnimation {
+    0% {
+        transform: scale(0.8);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
