@@ -13,18 +13,18 @@ export { exportTableDataAsJson, getRowWithNeighbors } from './CustomTable';
 export { default as CustomLabel } from './CustomLabel';
 import styles from '../styles/Home.module.css';
 
-export default function Home({
-  setIsLoading,
-  showInfo,
-  showSuccess,
-  showWarning,
-  showError,
-  showConfirm,
-  generateValidationMessage,
-  getMetaDataFromname,
-}) {
+// export default function Home({
+//   setIsLoading,
+//   showInfo,
+//   showSuccess,
+//   showWarning,
+//   showError,
+//   showConfirm,
+//   generateValidationMessage,
+//   getMetaDataFromname,
+// }) {
   
-  return (
-    <></>
-  );
-}
+//   return (
+//     <></>
+//   );
+// }
