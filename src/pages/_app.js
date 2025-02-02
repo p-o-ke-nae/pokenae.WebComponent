@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Layout from '../components/Layout';
 import '../app/globals.css';
 
-export function useAppFunctions() {
+function MyApp({ Component, pageProps }) {
   const [message, setMessage] = useState([]);
   const [messageType, setMessageType] = useState('info'); // info, success, warning, error
   const [messageDuration, setMessageDuration] = useState(0); // メッセージエリアを表示する秒数を指定
@@ -74,43 +74,29 @@ export function useAppFunctions() {
     };
   };
 
-  return {
-    showInfo,
-    showSuccess,
-    showWarning,
-    showError,
-    showConfirm,
-    generateValidationMessage,
-    getMetaDataFromname,
-    setIsLoading,
-    isLoading,
-    message,
-    messageType,
-    messageDuration,
-    isConfirmOpen,
-    confirmTitle,
-    confirmMessage,
-    handleConfirm,
-    handleCancel,
-  };
-}
-
-function MyApp({ children }) {
-  const appFunctions = useAppFunctions();
-
   return (
     <Layout
-      message={appFunctions.message}
-      messageType={appFunctions.messageType}
-      messageDuration={appFunctions.messageDuration}
-      isLoading={appFunctions.isLoading}
-      isConfirmOpen={appFunctions.isConfirmOpen}
-      confirmTitle={appFunctions.confirmTitle}
-      confirmMessage={appFunctions.confirmMessage}
-      onConfirm={appFunctions.handleConfirm}
-      onCancel={appFunctions.handleCancel}
+      message={message}
+      messageType={messageType}
+      messageDuration={messageDuration}
+      isLoading={isLoading}
+      isConfirmOpen={isConfirmOpen}
+      confirmTitle={confirmTitle}
+      confirmMessage={confirmMessage}
+      onConfirm={handleConfirm}
+      onCancel={handleCancel}
     >
-      { children}
+      <Component
+        {...pageProps}
+        setIsLoading={setIsLoading}
+        showInfo={showInfo}
+        showSuccess={showSuccess}
+        showWarning={showWarning}
+        showError={showError}
+        showConfirm={showConfirm}
+        generateValidationMessage={generateValidationMessage}
+        getMetaDataFromname={getMetaDataFromname}
+      />
     </Layout>
   );
 }
