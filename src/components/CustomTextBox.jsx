@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import PropTypes from 'prop-types';
 import styles from './CustomTextBox.module.css';
 
 const CustomTextBox = ({ metaData, value, onChange, status, placeholder, rows }) => {
@@ -19,15 +18,6 @@ const CustomTextBox = ({ metaData, value, onChange, status, placeholder, rows })
   return useMemo(() => (
     React.createElement(inputType, inputProps)
   ), [value, onChange, placeholder, rows]);
-};
-
-CustomTextBox.propTypes = {
-  metaData: PropTypes.object,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  onChange: PropTypes.func.isRequired,
-  status: PropTypes.oneOf(['required', 'readonly', 'normal']),
-  placeholder: PropTypes.string,
-  rows: PropTypes.number,
 };
 
 CustomTextBox.defaultProps = {

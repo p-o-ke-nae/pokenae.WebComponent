@@ -1,5 +1,4 @@
 import React, { useState, useMemo, useImperativeHandle, forwardRef, useCallback, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import styles from './CustomTable.module.css';
 import CustomTableHeader from './CustomTableHeader';
 import CustomTableRow from './CustomTableRow';
@@ -167,32 +166,6 @@ const CustomTable = forwardRef(({ columns, data, rowsPerPage, tableSettings = {}
     </div>
   );
 });
-
-CustomTable.propTypes = {
-  columns: PropTypes.arrayOf(PropTypes.shape({
-    header: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    visible: PropTypes.bool,
-    editable: PropTypes.bool,
-    type: PropTypes.string,
-    width: PropTypes.string, // 列幅を指定
-    settings: PropTypes.object, // 個別の設定を指定
-    metaData: PropTypes.object, // メタデータを指定
-    label: PropTypes.string, // ラベルを指定
-    showHeader: PropTypes.bool, // ヘッダの表示/非表示を指定
-  })).isRequired,
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  rowsPerPage: PropTypes.number,
-  tableSettings: PropTypes.shape({
-    fixedColumns: PropTypes.number, // 固定する列の数
-    allowRowAddition: PropTypes.bool, // 行追加の可否
-    sortableColumns: PropTypes.arrayOf(PropTypes.string), // ソート可能な列のリスト
-    recordsPerPageOptions: PropTypes.arrayOf(PropTypes.number), // 表示レコード数のオプション
-  }),
-  showConfirm: PropTypes.func.isRequired, // カスタムメッセージダイアログ
-  onDataChange: PropTypes.func.isRequired, // データ変更時のコールバック
-  onRowClick: PropTypes.func, // 行クリック時のコールバック
-};
 
 CustomTable.defaultProps = {
   rowsPerPage: 10,

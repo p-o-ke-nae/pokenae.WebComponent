@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './CustomTableRow.module.css';
 import CustomTextBox from './CustomTextBox';
 import CustomSpinBox from './CustomSpinBox';
@@ -70,27 +69,6 @@ const CustomTableRow = ({ row, columns, handleInputChange, editedCells, handleRo
       ))}
     </tr>
   );
-};
-
-CustomTableRow.propTypes = {
-  row: PropTypes.object.isRequired,
-  columns: PropTypes.arrayOf(PropTypes.shape({
-    header: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    visible: PropTypes.bool,
-    editable: PropTypes.bool,
-    type: PropTypes.string,
-    width: PropTypes.string,
-    settings: PropTypes.object,
-    metaData: PropTypes.object,
-    label: PropTypes.string,
-    showHeader: PropTypes.bool,
-  })).isRequired,
-  handleInputChange: PropTypes.func.isRequired,
-  editedCells: PropTypes.instanceOf(Set).isRequired,
-  handleRowClick: PropTypes.func.isRequired,
-  rowIndex: PropTypes.number.isRequired,
-  tableSettings: PropTypes.object.isRequired,
 };
 
 export default CustomTableRow;

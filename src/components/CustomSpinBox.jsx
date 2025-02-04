@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './CustomSpinBox.module.css';
 
 const CustomSpinBox = ({ metaData, value, onChange, status, placeholder, min, max, step }) => {
@@ -21,17 +20,6 @@ const CustomSpinBox = ({ metaData, value, onChange, status, placeholder, min, ma
   return (
     <input {...inputProps} />
   );
-};
-
-CustomSpinBox.propTypes = {
-  metaData: PropTypes.object,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  onChange: PropTypes.func.isRequired,
-  status: PropTypes.oneOf(['required', 'readonly', 'normal']),
-  placeholder: PropTypes.string,
-  min: PropTypes.number,
-  max: PropTypes.number,
-  step: PropTypes.number,
 };
 
 CustomSpinBox.defaultProps = {

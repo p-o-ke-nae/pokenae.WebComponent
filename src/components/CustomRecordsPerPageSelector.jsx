@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './CustomRecordsPerPageSelector.module.css';
 
 const CustomRecordsPerPageSelector = ({ recordsPerPage, setRecordsPerPage, options }) => {
@@ -17,12 +16,6 @@ const CustomRecordsPerPageSelector = ({ recordsPerPage, setRecordsPerPage, optio
       </select>
     </div>
   );
-};
-
-CustomRecordsPerPageSelector.propTypes = {
-  recordsPerPage: PropTypes.number.isRequired,
-  setRecordsPerPage: PropTypes.func.isRequired,
-  options: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
 
 export default CustomRecordsPerPageSelector;

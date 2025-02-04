@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './CustomPagination.module.css';
 
 const CustomPagination = ({ currentPage, totalPages, handleClick }) => {
@@ -46,12 +45,6 @@ const CustomPagination = ({ currentPage, totalPages, handleClick }) => {
       </button>
     </div>
   );
-};
-
-CustomPagination.propTypes = {
-  currentPage: PropTypes.number.isRequired,
-  totalPages: PropTypes.number.isRequired,
-  handleClick: PropTypes.func.isRequired,
 };
 
 export default CustomPagination;

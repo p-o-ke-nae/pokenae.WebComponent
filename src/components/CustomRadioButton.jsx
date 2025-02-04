@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './CustomRadioButton.module.css';
 
 const CustomRadioButton = ({ metaData, value, onChange, status, options }) => {
@@ -28,20 +27,6 @@ const CustomRadioButton = ({ metaData, value, onChange, status, options }) => {
       ))}
     </div>
   );
-};
-
-CustomRadioButton.propTypes = {
-    metaData: PropTypes.object,
-    name: PropTypes.string,
-    value: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
-    status: PropTypes.oneOf(['required', 'readonly', 'normal']),
-    options: PropTypes.arrayOf(
-    PropTypes.shape({
-        label: PropTypes.string.isRequired,
-        value: PropTypes.string.isRequired,
-    })
-    ).isRequired,
 };
 
 CustomRadioButton.defaultProps = {

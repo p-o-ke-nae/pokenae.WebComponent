@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './CustomImage.module.css';
 
 const CustomImage = ({ metaData, value, label }) => {
@@ -20,12 +19,6 @@ const CustomImage = ({ metaData, value, label }) => {
   ) : (
     <span className={styles.customimage}>{altText}</span>
   );
-};
-
-CustomImage.propTypes = {
-  metaData: PropTypes.object,
-  value: PropTypes.string.isRequired,
-  label: PropTypes.string,
 };
 
 export default CustomImage;

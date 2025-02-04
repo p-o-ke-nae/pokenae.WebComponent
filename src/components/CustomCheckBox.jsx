@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import styles from './CustomCheckBox.module.css';
 
 const CustomCheckBox = ({ metaData, value, onChange, status, label, indeterminate }) => {
@@ -38,15 +37,6 @@ const CustomCheckBox = ({ metaData, value, onChange, status, label, indeterminat
       {mylabel && <span className={styles.checkboxLabel}>{mylabel}</span>}
     </label>
   );
-};
-
-CustomCheckBox.propTypes = {
-  metaData: PropTypes.object,
-  value: PropTypes.bool.isRequired,
-  onChange: PropTypes.func.isRequired,
-  status: PropTypes.oneOf(['required', 'readonly', 'normal']),
-  label: PropTypes.string,
-  indeterminate: PropTypes.bool,
 };
 
 CustomCheckBox.defaultProps = {
