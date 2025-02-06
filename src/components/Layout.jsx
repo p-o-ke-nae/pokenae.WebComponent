@@ -23,7 +23,7 @@ const Layout = ({ children }) => {
         {/* ヘッダーコンテンツ */}
       </div>
       <div style={{ display: 'inline-block', width: '15%', height: '1000px', backgroundColor: '#f0f0f0', float: 'left' }}>
-        <div>testver2 ようやく移行できそうですね.更新</div>
+        <div>サイドバー</div>
       </div>
       <main style={{ display: 'inline-block', width: '70%', margin: '0 auto' }}>
         <CustomMessageArea
