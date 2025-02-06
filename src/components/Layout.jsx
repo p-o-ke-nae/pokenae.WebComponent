@@ -2,17 +2,30 @@ import React from 'react';
 import CustomMessageArea from './CustomMessageArea';
 import CustomLoading from './CustomLoading';
 import CustomMessageDialog from './CustomMessageDialog';
+import { useAppContext } from '../context/AppContext';
 
-const Layout = ({ children, message, messageType, messageDuration, isLoading, isConfirmOpen, confirmTitle, confirmMessage, onConfirm, onCancel }) => {
+const Layout = ({ children }) => {
+  const {
+    message,
+    messageType,
+    messageDuration,
+    isLoading,
+    isConfirmOpen,
+    confirmTitle,
+    confirmMessage,
+    handleConfirm,
+    handleCancel,
+  } = useAppContext();
+
   return (
-    <div className="container" >
+    <div className="container">
       <div style={{ width: '100%', height: '50px', backgroundColor: '#333', color: '#fff', textAlign: 'center', lineHeight: '50px' }}>
         {/* ヘッダーコンテンツ */}
       </div>
       <div style={{ display: 'inline-block', width: '15%', height: '1000px', backgroundColor: '#f0f0f0', float: 'left' }}>
         <div>testver2 ようやく移行できそうですね.更新</div>
       </div>
-      <main style={{ display: 'inline-block', width: '70%', margin: '0 auto', }}>
+      <main style={{ display: 'inline-block', width: '70%', margin: '0 auto' }}>
         <CustomMessageArea
           message={message}
           type={messageType}
@@ -24,8 +37,8 @@ const Layout = ({ children, message, messageType, messageDuration, isLoading, is
             title={confirmTitle}
             message={confirmMessage}
             isConfirmOpen={isConfirmOpen}
-            onConfirm={onConfirm}
-            onCancel={onCancel}
+            onConfirm={handleConfirm}
+            onCancel={handleCancel}
           />
         )}
         {children}

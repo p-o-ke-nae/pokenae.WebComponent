@@ -4,6 +4,7 @@
   "description": "ポケなえのWebコンポーネント",
   "main": "src/components/index.js",
   "scripts": {
+    "dev": "next dev --turbopack",
     "build": "webpack --config webpack.config.js",
     "test": "jest"
   },
