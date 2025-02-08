@@ -19,9 +19,6 @@ const Layout = ({ children }) => {
 
   return (
     <div className="container">
-      <head>
-        <meta name="google-site-verification" content="IUX-8TWXUwIqWtc8WttGG9Lai_R9_jIxiFBAv4dTdWM" />
-      </head>
       <div style={{ width: '100%', height: '50px', backgroundColor: '#333', color: '#fff', textAlign: 'center', lineHeight: '50px' }}>
         {/* ヘッダーコンテンツ */}
       </div>
