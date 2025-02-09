@@ -1,7 +1,9 @@
 import React, { useMemo } from 'react';
+import { usePageMode, PageModes } from '../context/PageModeContext';
 import styles from './CustomTextBox.module.css';
 
 const CustomTextBox = ({ metaData, value, onChange, status, placeholder, rows }) => {
+  const pageMode = usePageMode();
   const mystatus = status ?? (metaData ? metaData.status : 'normal');
   const inputType = rows ? 'textarea' : 'input';
   const inputProps = {
@@ -13,11 +15,12 @@ const CustomTextBox = ({ metaData, value, onChange, status, placeholder, rows })
     required: mystatus === 'required',
     readOnly: mystatus === 'readonly',
     rows: rows,
+    disabled: pageMode === PageModes.READ_ONLY,
   };
 
   return useMemo(() => (
     React.createElement(inputType, inputProps)
-  ), [value, onChange, placeholder, rows]);
+  ), [value, onChange, placeholder, rows, pageMode]);
 };
 
 CustomTextBox.defaultProps = {

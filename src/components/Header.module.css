@@ -1,0 +1,42 @@
+.header {
+  width: 100%;
+  height: 70px; /* 高さを大きくする */
+  background-color: var(--accent-color);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.headerLogoContainer {
+  width: 15%; /* ロゴ全体の幅を15%にする */
+  height: 100%; /* ロゴコンテナの高さをヘッダと同じにする */
+  display: flex;
+  align-items: center;
+}
+
+.headerLogo {
+  height: 100%; /* ロゴの高さをヘッダと同じにする */
+  object-fit: contain; /* アスペクト比を保つ */
+}
+
+.nav {
+  display: flex;
+  gap: 10px; /* カテゴリ間の間隔を10pxにする */
+  width: 70%; /* カテゴリ全体の幅を70%にする */
+  justify-content: center; /* カテゴリを中央揃えにする */
+}
+
+.navLink {
+  color: #fff;
+  text-decoration: none;
+  flex: 1; /* カテゴリリンクの幅を均等にする */
+  text-align: center; /* カテゴリリンクを中央揃えにする */
+}
+
+.login {
+  width: 15%; /* ログインコンポーネントの幅を15%にする */
+  display: flex;
+  justify-content: flex-end; /* ログインコンポーネントを右揃えにする */
+}
