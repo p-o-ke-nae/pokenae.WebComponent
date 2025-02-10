@@ -40,3 +40,26 @@
   display: flex;
   justify-content: flex-end; /* ログインコンポーネントを右揃えにする */
 }
+
+@media (max-width: 800px) {
+  .header {
+    height: 140px; /* 高さを大きくする */
+    display: flex;
+    flex-wrap: wrap; /* 要素を折り返す */
+  }
+  
+  .headerLogoContainer {
+    order: 1; /* 最初の要素 */
+    height: 50%;
+  }
+  
+  .nav {
+    order: 3; /* 三番目の要素 */
+    width: 100%;
+  }
+  
+  .login {
+    order: 2; /* 二番目の要素 */
+    width: 85%;
+  }
+}
