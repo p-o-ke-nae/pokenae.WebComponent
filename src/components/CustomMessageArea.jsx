@@ -22,7 +22,7 @@ const CustomMessageArea = ({ message, type, duration }) => {
   };
 
   return (
-    <div className={`${styles['custommessagearea-container']}`}>
+    <div className={`${styles['custommessagearea-container']} ${visible ? styles.visible : styles.hidden}`}>
       <div className={ `${styles.custommessagearea} ${visible ? styles.visible : styles.hidden} ${styles[`message-${type}`]}`}>
         <button type="button" className={`${styles['close-button']}`} onClick={closeMessage} >×</button>
         <div className={styles.alert}>

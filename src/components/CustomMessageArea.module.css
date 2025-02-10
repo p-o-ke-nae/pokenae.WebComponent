@@ -31,7 +31,9 @@
     top: 0px;
     width: 100%;
     height: 0;
-    z-index: 1000;
+    
+    /* アニメーションの設定 */
+    transition: z-index 0.5s;
 }
 .custommessagearea.visible {
     opacity: 1;
@@ -40,6 +42,12 @@
 .custommessagearea.hidden {
     opacity: 0;
     transform: translateY(-100%);
+}
+.custommessagearea-container.visible {
+    z-index: 1000;
+}
+.custommessagearea-container.hidden {
+    z-index: -1;
 }
 .custommessagearea .alert {
     padding: 10px;
