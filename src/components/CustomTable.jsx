@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useMemo, useImperativeHandle, forwardRef, useCallback, useEffect } from 'react';
 import styles from './CustomTable.module.css';
 import CustomTableHeader from './CustomTableHeader';
@@ -7,6 +9,15 @@ import CustomRecordsPerPageSelector from './CustomRecordsPerPageSelector';
 import CustomButton from './CustomButton';
 
 const CustomTable = forwardRef(({ columns, data, rowsPerPage, tableSettings = {}, showConfirm, onDataChange, onRowClick }, ref) => {
+  // tableSettingsのデフォルト値を設定
+  const defaultTableSettings = {
+    sortableColumns: [],
+    fixedColumns: 0,
+    allowRowAddition: false,
+    allowRowDeletion: false,
+    ...tableSettings
+  };
+
   const [currentPage, setCurrentPage] = useState(1);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'ascending' });
   const [tableData, setTableData] = useState(data.map((item, index) => ({ ...item, id: index })));
@@ -47,14 +58,14 @@ const CustomTable = forwardRef(({ columns, data, rowsPerPage, tableSettings = {}
 
   // ソートリクエストの処理
   const requestSort = useCallback((key) => {
-    if (tableSettings.sortableColumns.includes(key)) {
+    if (defaultTableSettings.sortableColumns.includes(key)) {
       let direction = 'ascending';
       if (sortConfig.key === key && sortConfig.direction === 'ascending') {
         direction = 'descending';
       }
       setSortConfig({ key, direction });
     }
-  }, [sortConfig, tableSettings]);
+  }, [sortConfig, defaultTableSettings]);
 
   // 入力変更時の処理
   const handleInputChange = useCallback((id, name, value) => {
@@ -74,7 +85,7 @@ const CustomTable = forwardRef(({ columns, data, rowsPerPage, tableSettings = {}
 
   // 行追加時の処理
   const handleAddRow = useCallback(() => {
-    if (tableSettings.allowRowAddition) {
+    if (defaultTableSettings.allowRowAddition) {
       const newRow = columns.reduce((acc, column) => {
         acc[column.name] = '';
         return acc;
@@ -84,7 +95,7 @@ const CustomTable = forwardRef(({ columns, data, rowsPerPage, tableSettings = {}
       setTableData(newData);
       onDataChange(newData); // 行追加時にコールバックを呼び出す
     }
-  }, [tableSettings, columns, tableData, onDataChange]);
+  }, [defaultTableSettings, columns, tableData, onDataChange]);
 
   useImperativeHandle(ref, () => ({
     getTableData: () => tableData,
@@ -128,16 +139,16 @@ const CustomTable = forwardRef(({ columns, data, rowsPerPage, tableSettings = {}
       <CustomRecordsPerPageSelector
         recordsPerPage={recordsPerPage}
         setRecordsPerPage={setRecordsPerPage}
-        options={tableSettings.recordsPerPageOptions || [5, 10, 20, 50, 100]}
+        options={defaultTableSettings.recordsPerPageOptions || [5, 10, 20, 50, 100]}
       />
-      {tableSettings.allowRowAddition && (
+      {defaultTableSettings.allowRowAddition && (
         <CustomButton onClick={handleAddRow} className={styles['add-row-button']}>
           行を追加
         </CustomButton>
       )}
       <div className={styles['customtable-container']}>
         <table className={`${styles.customtable}`} style={{ width: `${tableWidth}px` }}>
-          <CustomTableHeader columns={columns} requestSort={requestSort} sortConfig={sortConfig} tableSettings={tableSettings} />
+          <CustomTableHeader columns={columns} requestSort={requestSort} sortConfig={sortConfig} tableSettings={defaultTableSettings} />
           <tbody className={styles['tbody-fixed-height']}>
             {currentData.map((row, rowIndex) => (
               <CustomTableRow
@@ -148,7 +159,7 @@ const CustomTable = forwardRef(({ columns, data, rowsPerPage, tableSettings = {}
                 editedCells={editedCells}
                 handleRowClick={handleRowClick}
                 rowIndex={rowIndex}
-                tableSettings={tableSettings}
+                tableSettings={defaultTableSettings}
               />
             ))}
             {/* 空の行を追加して高さを固定 */}

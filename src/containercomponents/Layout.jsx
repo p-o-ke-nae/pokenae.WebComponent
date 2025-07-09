@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import CustomMessageArea from './CustomMessageArea';
-import CustomLoading from './CustomLoading';
-import CustomMessageDialog from './CustomMessageDialog';
+import CustomMessageArea from '../components/CustomMessageArea';
+import CustomLoading from '../components/CustomLoading';
+import CustomMessageDialog from '../components/CustomMessageDialog';
 import { useAppContext } from '../context/AppContext';
 import { checkPermissions } from '../utils/permissions';
 import { PageModeProvider, PageModes } from '../context/PageModeContext';

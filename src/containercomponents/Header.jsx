@@ -1,6 +1,6 @@
 import React from 'react';
 import Login from './Login';
-import CustomImage from './CustomImage'; // カスタムイメージコンポーネントをインポート
+import CustomImage from '../components/CustomImage'; // カスタムイメージコンポーネントをインポート
 import styles from './Header.module.css';
 
 const Header = ({ categories }) => {
