@@ -2,19 +2,29 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: auto; /* 高さを自動調整に変更 */
 }
 
 .login-button {
-  padding: 10px 20px;
-  font-size: 16px;
+  padding: 6px 12px; /* パディングを小さくする */
+  font-size: 12px; /* フォントサイズを小さくする */
   background-color: #4285F4;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  white-space: nowrap; /* テキストの折り返しを防ぐ */
 }
 
 .login-button:hover {
   background-color: #357AE8;
+}
+
+/* スマホ表示用のスタイル */
+@media (max-width: 800px) {
+  .login-button {
+    padding: 4px 8px; /* さらに小さなパディング */
+    font-size: 10px; /* さらに小さなフォントサイズ */
+    min-width: 60px; /* 最小幅を設定 */
+  }
 }

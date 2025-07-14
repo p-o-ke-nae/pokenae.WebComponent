@@ -43,23 +43,54 @@
 
 @media (max-width: 800px) {
   .header {
-    height: 140px; /* 高さを大きくする */
+    height: 50px; /* 固定の高さを設定 */
     display: flex;
-    flex-wrap: wrap; /* 要素を折り返す */
+    flex-direction: row; /* 横並びレイアウトを維持 */
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 10px; /* パディングを調整 */
   }
   
   .headerLogoContainer {
-    order: 1; /* 最初の要素 */
-    height: 50%;
+    width: 20%; /* 幅を調整 */
+    height: 100%; /* 高さを100%にする */
+    justify-content: flex-start; /* ロゴを左揃え */
+  }
+  
+  .headerLogo {
+    height: 80%; /* ロゴの高さを調整 */
+    max-width: 80px; /* 最大幅を小さくする */
   }
   
   .nav {
-    order: 3; /* 三番目の要素 */
-    width: 100%;
+    width: 60%; /* 幅を調整 */
+    flex-wrap: nowrap; /* 折り返しを無効にする */
+    gap: 2px; /* リンク間のスペースを最小にする */
+    justify-content: center; /* 中央揃え */
+    overflow: hidden; /* はみ出しを隠す */
+  }
+  
+  .navLink {
+    flex: 1; /* flexを有効にして均等配置 */
+    min-width: 50px; /* 最小幅を小さくする */
+    padding: 2px 4px; /* パディングを最小にする */
+    border-radius: 2px; /* 角を小さくする */
+    font-size: 10px; /* フォントサイズを最小にする */
+    background-color: rgba(255, 255, 255, 0.1); /* 背景色を追加 */
+    transition: background-color 0.3s ease; /* ホバー効果用 */
+    white-space: nowrap; /* テキストの折り返しを無効 */
+    overflow: hidden; /* テキストのはみ出しを隠す */
+    text-overflow: ellipsis; /* 長いテキストに省略記号を表示 */
+  }
+  
+  .navLink:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* ホバー時の背景色 */
   }
   
   .login {
-    order: 2; /* 二番目の要素 */
-    width: 85%;
+    width: 20%; /* 幅を調整 */
+    justify-content: flex-end; /* 右揃え */
+    height: 100%; /* 高さを100%にする */
+    align-items: center; /* 垂直方向の中央揃え */
   }
 }
