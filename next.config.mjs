@@ -4,11 +4,6 @@ const nextConfig = {
   // ビルド時にコンポーネントのみをエクスポート
   transpilePackages: ['react', 'react-dom'],
   
-  // 開発時のコンポーネントテスト用設定
-  experimental: {
-    appDir: true
-  },
-  
   // コンポーネントライブラリとしての設定
   env: {
     LIBRARY_NAME: 'Pokenae WebComponent'
