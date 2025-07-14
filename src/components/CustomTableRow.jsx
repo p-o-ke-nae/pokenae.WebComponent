@@ -51,7 +51,11 @@ const CustomTableRow = ({ row, columns, handleInputChange, editedCells, handleRo
                   onChange={(e) => handleInputChange(row.id, column.key || column.name, e.target.checked)}
                 />
               ) : (
-                <CustomLabel metaData={column.metaData}>{row[column.key || column.name]}</CustomLabel>
+                <CustomCheckBox
+                  value={row[column.key || column.name]}
+                  status="readonly"
+                  onChange={() => {}} // 読み込み専用なので空の関数
+                />
               )
             ) : column.type === 'image' ? (
               <div style={{ height: rowHeight, display: 'flex', alignItems: 'center' }}> {/* 親要素を追加して高さを制御 */}

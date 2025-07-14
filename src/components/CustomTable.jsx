@@ -8,7 +8,7 @@ import CustomPagination from './CustomPagination';
 import CustomRecordsPerPageSelector from './CustomRecordsPerPageSelector';
 import CustomButton from './CustomButton';
 
-const CustomTable = forwardRef(({ columns, data, rowsPerPage, tableSettings = {}, showConfirm, onDataChange, onRowClick }, ref) => {
+const CustomTable = forwardRef(({ columns, data, rowsPerPage, tableSettings = {}, showConfirm, onDataChange, onRowClick, detailComponent }, ref) => {
   // tableSettingsのデフォルト値を設定
   const defaultTableSettings = {
     sortableColumns: [],
@@ -130,7 +130,7 @@ const CustomTable = forwardRef(({ columns, data, rowsPerPage, tableSettings = {}
     const prevRow = currentData[rowIndex - 1] || null;
     const nextRow = currentData[rowIndex + 1] || null;
     if (onRowClick) {
-      onRowClick(row, prevRow, nextRow);
+      onRowClick(rowIndex, row, prevRow, nextRow); // rowIndexとrowオブジェクトの両方を渡す
     }
   }, [currentData, onRowClick]);
 
