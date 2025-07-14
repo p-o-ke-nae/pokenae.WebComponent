@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+// Next.js環境では react-router-dom の代わりに next/navigation を使用
+// import { useNavigate } from 'react-router-dom';
 
 const Callback = () => {
   // const navigate = useNavigate();
