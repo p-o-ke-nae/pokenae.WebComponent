@@ -25,6 +25,14 @@ const CustomTable = forwardRef(({ columns, data, rowsPerPage, tableSettings = {}
   const [editedCells, setEditedCells] = useState(new Set());
   const [originalData, setOriginalData] = useState(new Map());
 
+  // propsのdataが変更されたときに内部状態を更新
+  useEffect(() => {
+    setTableData(data.map((item, index) => ({ ...item, id: index })));
+    // 新しいデータが来た場合、編集状態をリセット
+    setEditedCells(new Set());
+    setOriginalData(new Map());
+  }, [data]);
+
   const totalPages = Math.ceil(tableData.length / recordsPerPage);
 
   // ページ変更時の処理
