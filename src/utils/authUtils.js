@@ -4,7 +4,14 @@
 // Google OAuth2設定
 export const GOOGLE_AUTH_CONFIG = {
   CLIENT_ID: '805729941904-h95ej9999oqro2i98q138tiduioamuk9.apps.googleusercontent.com',
-  REDIRECT_URI: 'http://localhost:3001/callback',
+  // 環境に応じて動的にリダイレクトURIを設定
+  get REDIRECT_URI() {
+    if (typeof window !== 'undefined') {
+      return `${window.location.origin}/callback`;
+    }
+    // サーバーサイドの場合のフォールバック
+    return 'http://localhost:3001/callback';
+  },
   TOKEN_ENDPOINT: 'https://oauth2.googleapis.com/token',
   USERINFO_ENDPOINT: 'https://www.googleapis.com/oauth2/v2/userinfo',
   SCOPES: ['openid', 'email', 'profile']
@@ -12,7 +19,37 @@ export const GOOGLE_AUTH_CONFIG = {
 
 // バックエンドAPI設定
 export const BACKEND_API_CONFIG = {
-  BASE_URL: 'https://localhost:7133',
+  // 環境に応じて動的にベースURLを設定
+  get BASE_URL() {
+    if (typeof window !== 'undefined') {
+      const currentHost = window.location.hostname;
+      const currentProtocol = window.location.protocol;
+      const currentPort = window.location.port;
+      
+      // localhost or 127.0.0.1の場合は開発環境用のURL
+      if (currentHost === 'localhost' || currentHost === '127.0.0.1') {
+        return 'https://localhost:7133';
+      }
+      
+      // 本番環境の場合
+      // 本番環境のAPIサーバーのドメインに合わせて設定してください
+      
+      // 例1: 同じドメインで異なるポート (例: pokenae.com:7133)
+      // return `${currentProtocol}//${currentHost}:7133`;
+      
+      // 例2: 別のサブドメイン (例: api.pokenae.com)
+      // return `${currentProtocol}//api.${currentHost}`;
+      
+      // 例3: 同じドメインでhttpsのデフォルトポート
+      if (currentProtocol === 'https:') {
+        return `https://${currentHost}`;
+      } else {
+        return `http://${currentHost}:7133`;
+      }
+    }
+    // サーバーサイドの場合のフォールバック
+    return 'https://localhost:7133';
+  },
   ENDPOINTS: {
     OAUTH_CALLBACK: '/api/authentication/callback'
   }
@@ -46,7 +83,12 @@ const DEBUG_MODE = process.env.NODE_ENV === 'development';
 export const exchangeCodeForTokens = async (code, state) => {
   try {
     if (DEBUG_MODE) {
-      console.log('🔄 Exchanging code for tokens:', { code: code.substring(0, 10) + '...', state });
+      console.log('🔄 Exchanging code for tokens:', { 
+        code: code.substring(0, 10) + '...', 
+        state,
+        redirectUri: GOOGLE_AUTH_CONFIG.REDIRECT_URI,
+        backendBaseUrl: BACKEND_API_CONFIG.BASE_URL
+      });
     }
 
     // バックエンドのcallbackエンドポイントにPOSTリクエストを送信

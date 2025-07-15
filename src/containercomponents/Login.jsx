@@ -59,7 +59,10 @@ const Login = () => {
     
     console.log('🚀 Starting Google OAuth flow...', {
       redirectHost: window.location.origin,
-      stateParam: stateParam
+      stateParam: stateParam,
+      redirectUri: GOOGLE_AUTH_CONFIG.REDIRECT_URI,
+      currentHost: window.location.hostname,
+      fullAuthUrl: `https://accounts.google.com/o/oauth2/v2/auth?${params.toString()}`
     });
     window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?${params.toString()}`;
   };
