@@ -16,6 +16,9 @@
     border-radius: 3px;
     position: relative;
     transition: background-color 0.3s, border-color 0.3s;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 .customcheckbox-container:hover .customcheckbox {
@@ -34,12 +37,14 @@
     top: 50%;
     left: 50%;
     font-size: 14px;
-    color: var(--base-bg-color);
+    color: var(--base-bg-color) !important;
     transform: translate(-50%, -50%);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .customcheckbox-container:hover .checkboxInput:checked + .customcheckbox::after {
-    color: var(--base-color);
+    color: var(--base-bg-color) !important;
 }
 
 .checkboxInput:indeterminate + .customcheckbox {
@@ -53,8 +58,16 @@
     top: 50%;
     left: 50%;
     font-size: 14px;
-    color: var(--base-bg-color);
+    color: var(--base-bg-color) !important;
     transform: translate(-50%, -50%);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.customcheckbox-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
 }
 
 .checkboxLabel {
@@ -70,5 +83,28 @@
     }
     100% {
         transform: scale(1);
+    }
+}
+
+/* スマホとPC版での統一性を保つためのメディアクエリ */
+@media (max-width: 768px) {
+    .checkboxInput:checked + .customcheckbox::after {
+        color: var(--base-bg-color) !important;
+        text-rendering: optimizeLegibility;
+    }
+    
+    .customcheckbox-container:hover .checkboxInput:checked + .customcheckbox::after {
+        color: var(--base-bg-color) !important;
+    }
+    
+    .checkboxInput:indeterminate + .customcheckbox::after {
+        color: var(--base-bg-color) !important;
+        text-rendering: optimizeLegibility;
+    }
+    
+    .checkboxLabel {
+        font-family: 'Yu Gothic UI', 'Yu Gothic', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
 }

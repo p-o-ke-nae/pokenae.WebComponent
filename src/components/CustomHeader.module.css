@@ -6,9 +6,12 @@
 .customheader-container h3{
     border-bottom: 2px solid var(--main-border-color);
     text-align:left;
-    font-family:'Yu Gothic UI';
+    font-family: 'Yu Gothic UI', 'Yu Gothic', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
     margin: 0px;
     font-size:19px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: normal;
 }
 
 .header-normal {
@@ -23,4 +26,19 @@
 .requiredmark{
     color: var(--required-color);
     margin-left: 2px;
+}
+
+/* スマホとPC版での統一性を保つためのメディアクエリ */
+@media (max-width: 768px) {
+    .customheader-container h3 {
+        font-family: 'Yu Gothic UI', 'Yu Gothic', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif !important;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-weight: normal;
+        text-rendering: optimizeLegibility;
+    }
+    
+    .customheader {
+        font-family: inherit;
+    }
 }
