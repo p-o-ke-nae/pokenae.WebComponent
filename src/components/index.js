@@ -45,6 +45,7 @@ export { PageModeProvider, usePageModeContext } from '../context/PageModeContext
 export * from '../utils/api';
 export * from '../utils/permissions';
 export * from '../utils/validation';
+export * from '../utils/authUtils';
 
 // メタデータ
 export * from '../metadata/FormMetaData';
