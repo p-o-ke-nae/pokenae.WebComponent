@@ -135,12 +135,14 @@ const CustomTable = forwardRef(({ columns, data, rowsPerPage, tableSettings = {}
   // 行クリック時の処理
   const handleRowClick = useCallback((rowIndex) => {
     const row = currentData[rowIndex];
+    // ページ内のインデックスを全体のインデックスに変換
+    const globalIndex = startIndex + rowIndex;
     const prevRow = currentData[rowIndex - 1] || null;
     const nextRow = currentData[rowIndex + 1] || null;
     if (onRowClick) {
-      onRowClick(rowIndex, row, prevRow, nextRow); // rowIndexとrowオブジェクトの両方を渡す
+      onRowClick(globalIndex, row, prevRow, nextRow); // グローバルインデックスを渡す
     }
-  }, [currentData, onRowClick]);
+  }, [currentData, onRowClick, startIndex]);
 
   return (
     <div className={styles['table-wrapper']} style={{ '--rows-per-page': recordsPerPage, '--row-height': `${40}px` }}>
