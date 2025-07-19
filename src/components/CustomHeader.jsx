@@ -1,3 +1,5 @@
+'use client';
+
 import styles from './CustomHeader.module.css';
 
 const CustomHeader = ({ metaData, status, children }) => {

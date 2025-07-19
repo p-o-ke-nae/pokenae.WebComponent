@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useMemo } from 'react';
 import { usePageMode, PageModes } from '../context/PageModeContext';
 import styles from './CustomTextBox.module.css';

@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from 'react';
 import CustomMessageArea from '../components/CustomMessageArea';
 import CustomLoading from '../components/CustomLoading';

@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import CustomModal from './CustomModal';
 import styles from './CustomLoading.module.css';

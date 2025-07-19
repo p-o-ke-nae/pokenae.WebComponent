@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import Login from './Login';
 import CustomImage from '../components/CustomImage'; // カスタムイメージコンポーネントをインポート

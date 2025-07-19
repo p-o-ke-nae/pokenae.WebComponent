@@ -4,7 +4,7 @@
   "description": "ポケなえのWebコンポーネントライブラリ",
   "main": "src/components/index.js",
   "scripts": {
-    "dev": "next dev --turbopack --port 3002",
+    "dev": "next dev --port 3002",
     "build": "next build",
     "build:components": "webpack --config webpack.config.js",
     "test": "jest",

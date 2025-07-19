@@ -33,7 +33,7 @@ const CustomTable = forwardRef(({ columns, data, rowsPerPage, tableSettings = {}
     setOriginalData(new Map());
   }, [data]);
 
-  const totalPages = Math.ceil(tableData.length / recordsPerPage);
+  const totalPages = useMemo(() => Math.ceil(tableData.length / recordsPerPage), [tableData.length, recordsPerPage]);
 
   // ページ変更時の処理
   const handleClick = useCallback(async (page) => {
@@ -77,33 +77,42 @@ const CustomTable = forwardRef(({ columns, data, rowsPerPage, tableSettings = {}
 
   // 入力変更時の処理
   const handleInputChange = useCallback((id, name, value) => {
-    const newData = tableData.map((item) => {
-      if (item.id === id) {
-        if (!originalData.has(id)) {
-          originalData.set(id, { ...item });
+    setTableData((prevTableData) => {
+      const newData = prevTableData.map((item) => {
+        if (item.id === id) {
+          setOriginalData((prevOriginalData) => {
+            if (!prevOriginalData.has(id)) {
+              const newOriginalData = new Map(prevOriginalData);
+              newOriginalData.set(id, { ...item });
+              return newOriginalData;
+            }
+            return prevOriginalData;
+          });
+          return { ...item, [name]: value };
         }
-        return { ...item, [name]: value };
-      }
-      return item;
+        return item;
+      });
+      onDataChange(newData); // データ変更時にコールバックを呼び出す
+      return newData;
     });
-    setTableData(newData);
     setEditedCells((prev) => new Set(prev).add(`${id}-${name}`));
-    onDataChange(newData); // データ変更時にコールバックを呼び出す
-  }, [tableData, onDataChange, originalData]);
+  }, [onDataChange]);
 
   // 行追加時の処理
   const handleAddRow = useCallback(() => {
     if (defaultTableSettings.allowRowAddition) {
-      const newRow = columns.reduce((acc, column) => {
-        acc[column.name] = '';
-        return acc;
-      }, {});
-      newRow.id = tableData.length;
-      const newData = [...tableData, newRow];
-      setTableData(newData);
-      onDataChange(newData); // 行追加時にコールバックを呼び出す
+      setTableData((prevTableData) => {
+        const newRow = columns.reduce((acc, column) => {
+          acc[column.name] = '';
+          return acc;
+        }, {});
+        newRow.id = prevTableData.length;
+        const newData = [...prevTableData, newRow];
+        onDataChange(newData); // 行追加時にコールバックを呼び出す
+        return newData;
+      });
     }
-  }, [defaultTableSettings, columns, tableData, onDataChange]);
+  }, [defaultTableSettings.allowRowAddition, columns, onDataChange]);
 
   useImperativeHandle(ref, () => ({
     getTableData: () => tableData,
@@ -123,11 +132,11 @@ const CustomTable = forwardRef(({ columns, data, rowsPerPage, tableSettings = {}
       });
       return editedRows;
     },
-  }));
+  }), [tableData, currentData, editedCells, originalData]);
 
   // レコード数変更時に現在ページが最大ページ数を超えている場合の処理
   useEffect(() => {
-    if (currentPage > totalPages) {
+    if (currentPage > totalPages && totalPages > 0) {
       setCurrentPage(totalPages);
     }
   }, [totalPages, currentPage]);
