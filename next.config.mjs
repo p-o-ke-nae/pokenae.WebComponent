@@ -10,19 +10,21 @@ const nextConfig = {
   },
   
   // クライアントサイドレンダリング用の設定
-  output: 'export',
-  trailingSlash: true,
+  // output: 'export',
+  // trailingSlash: true,
   
   // 外部依存関係の設定
   webpack: (config) => {
-    // コンポーネントライブラリとして使用される場合の設定
-    if (!config.isServer) {
-      config.externals = {
-        ...config.externals,
-        react: 'react',
-        'react-dom': 'react-dom'
-      };
-    }
+    // コンポーネントライブラリとして使用される場合の設定は一旦無効化
+    // if (!config.isServer) {
+    //   config.externals = [
+    //     ...(Array.isArray(config.externals) ? config.externals : []),
+    //     {
+    //       react: 'react',
+    //       'react-dom': 'react-dom'
+    //     }
+    //   ];
+    // }
     return config;
   }
 };

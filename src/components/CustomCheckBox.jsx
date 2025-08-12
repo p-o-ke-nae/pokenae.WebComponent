@@ -1,49 +1,94 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import PropTypes from 'prop-types';
 import styles from './CustomCheckBox.module.css';
 
-const CustomCheckBox = ({ metaData, value, onChange, status, label, indeterminate }) => {
-  const mystatus = status ?? (metaData ? metaData.status : 'normal');
-  const mylabel = label ? label : metaData ? metaData.label : '';
+const CustomCheckBox = React.memo(({ 
+  metaData, 
+  value = false, 
+  onChange, 
+  status, 
+  label, 
+  indeterminate = false,
+  name,
+  className = '',
+  disabled,
+  readOnly,
+  ...otherProps 
+}) => {
+  const checkboxRef = useRef(null);
   const [isChecked, setIsChecked] = useState(value);
+  
+  // Determine effective status and configuration
+  const effectiveStatus = status ?? metaData?.status ?? 'normal';
+  const effectiveLabel = label ?? metaData?.label ?? '';
+  const effectiveName = name ?? metaData?.name ?? '';
+  const isReadOnly = readOnly ?? (effectiveStatus === 'readonly');
+  const isDisabled = disabled;
 
+  // Update internal state when value prop changes
   useEffect(() => {
     setIsChecked(value);
   }, [value]);
 
-  const handleChange = (event) => {
-    if (mystatus === 'readonly') return;
+  // Set indeterminate state
+  useEffect(() => {
+    if (checkboxRef.current) {
+      checkboxRef.current.indeterminate = indeterminate;
+    }
+  }, [indeterminate]);
+
+  // Optimized change handler
+  const handleChange = useCallback((event) => {
+    if (isReadOnly || isDisabled) return;
+    
     const newChecked = event.target.checked;
     setIsChecked(newChecked);
-    onChange(event);
-  };
+    
+    if (onChange) {
+      onChange(event);
+    }
+  }, [onChange, isReadOnly, isDisabled]);
 
-  
   return (
-    <label className={`${styles['customcheckbox-container']}`}>
+    <label className={`${styles['customcheckbox-container']} ${className}`.trim()}>
       <input
-        type={'checkbox'}
-        name={metaData ? metaData.name : ''}
+        ref={checkboxRef}
+        type="checkbox"
+        name={effectiveName}
         checked={isChecked}
         onChange={handleChange}
-        readOnly={mystatus === 'readonly'}
+        readOnly={isReadOnly}
+        disabled={isDisabled}
         className={styles.checkboxInput}
-        aria-checked={isChecked}
-        aria-readonly={mystatus === 'readonly'}
-        ref={(el) => {
-          if (el) el.indeterminate = indeterminate;
-        }}
+        aria-checked={indeterminate ? 'mixed' : isChecked}
+        aria-readonly={isReadOnly}
+        {...otherProps}
       />
       <span className={styles.customcheckbox}></span>
-      {mylabel && <span className={styles.checkboxLabel}>{mylabel}</span>}
+      {effectiveLabel && <span className={styles.checkboxLabel}>{effectiveLabel}</span>}
     </label>
   );
-};
+});
 
-CustomCheckBox.defaultProps = {
-  status: 'normal',
-  indeterminate: false,
+CustomCheckBox.displayName = 'CustomCheckBox';
+
+CustomCheckBox.propTypes = {
+  metaData: PropTypes.shape({
+    name: PropTypes.string,
+    label: PropTypes.string,
+    status: PropTypes.oneOf(['normal', 'required', 'readonly']),
+  }),
+  value: PropTypes.bool,
+  onChange: PropTypes.func,
+  status: PropTypes.oneOf(['normal', 'required', 'readonly']),
+  label: PropTypes.string,
+  indeterminate: PropTypes.bool,
+  name: PropTypes.string,
+  className: PropTypes.string,
+  disabled: PropTypes.bool,
+  readOnly: PropTypes.bool,
 };
 
 export default CustomCheckBox;

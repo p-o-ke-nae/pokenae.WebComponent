@@ -39,7 +39,7 @@ export { default as Callback } from '../containercomponents/Callback';
 
 // Context プロバイダー
 export { AppProvider, useAppContext } from '../context/AppContext';
-export { PageModeProvider, usePageModeContext } from '../context/PageModeContext';
+export { PageModeProvider, usePageMode, PageModes } from '../context/PageModeContext';
 
 // ユーティリティ
 export * from '../utils/api';
